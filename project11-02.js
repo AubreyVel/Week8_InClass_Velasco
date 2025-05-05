@@ -22,13 +22,29 @@ postalCode.onblur = function() {
       place.value = "";
       region.value = "";
 
-      fetch (`http://api.zippopotam.us/${countryValue}/${codeValue}`)
-      .then(response => response.json())
-      .then(json => {
-            place.value = json.places[0]["place name"]
-            region.value = json.places[0]["state abbreviation"]
-      })
+      // fetch (`http://api.zippopotam.us/${countryValue}/${codeValue}`)
+      // .then(response => response.json())
+      // .then(json => {
+      //       place.value = json.places[0]["place name"]
+      //       region.value = json.places[0]["state abbreviation"]
+      // })
 
-      .catch(console.log("failed"))
+      // .catch(console.log("failed"))
+
+
+
+
+
+      let xhr = new XMLHttpRequest();
+      let url = `http://api.zippopotam.us/${countryValue}/${codeValue}` 
+      xhr.onreadystatechange=function() {
+            if(xhr.readyState == 4 && xhr.status ==200){
+                  let json = JSON.parse(xhr.response);
+                  place.value = json.places[0]["place name"];
+                  region.value = json.places[0]["state abbreviation"];
+            }
+      }
+      xhr.open("GET",url,true);
+      xhr.send();
 
 }
