@@ -16,6 +16,7 @@ let region = document.getElementById("region");
 let country = document.getElementById("country");
 
 postalCode.onblur = function() {
+      
       let codeValue = postalCode.value;
       let countryValue = country.value;
       place.value = "";
