@@ -26,7 +26,7 @@ postalCode.onblur = function() {
       .then(response => response.json())
       .then(json => {
             place.value = json.places[0]["place name"]
-            region.value = json.places[0]["state abbrrviation"]
+            region.value = json.places[0]["state abbreviation"]
       })
 
       .catch(console.log("failed"))
