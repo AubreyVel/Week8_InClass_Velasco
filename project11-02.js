@@ -16,17 +16,18 @@ let region = document.getElementById("region");
 let country = document.getElementById("country");
 
 postalCode.onblur = function() {
+      let codeValue = postalCode.value;
+      let countryValue = country.value;
+      place.value = "";
+      region.value = "";
 
- let codeValue = document.getElementById("postalCode");
- let countryValue = document.getElementById("country");
+      fetch (`http://api.zippopotam.us/${countryValue}/${codeValue}`)
+      .then(response => response.json())
+      .then(json => {
+            place.value = json.places[0]["place name"]
+            region.value = json.places[0]["state abbrrviation"]
+      })
 
- document.getElementById("place").innerText = "";
- document.getElementById("region").innerText = "";
-
- fetch("http://api.zippopotam.us/"+countryValue+"/"+codeValue)
- .then()
+      .catch(console.log("failed"))
 
 }
-
-
-
